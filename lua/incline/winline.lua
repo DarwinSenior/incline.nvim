@@ -239,6 +239,9 @@ function Winline:render(opts)
 
   if content_text_changed then
     a.nvim_buf_set_lines(buf, 0, -1, false, { self.content.text })
+    -- make sure that the buffer does not needs to be saved
+    a.nvim_buf_set_option(self._buf, 'buftype', 'nofile')
+    a.nvim_buf_set_option(self._buf, 'bufhidden', 'unload')
   end
   if content_text_changed or content_hls_changed then
     highlight.buf_clear(buf)
